@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'SafePath',
+      title: 'SafePath Lite',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -27,8 +27,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('SafePath'), centerTitle: true),
-      body: const Center(child: Text('SafePath Guardian')),
+      appBar: AppBar(title: const Text('SafePath Lite'), centerTitle: true),
+      body: const Center(child: Text('SafePath SPL')),
     );
   }
 }
