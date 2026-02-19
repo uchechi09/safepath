@@ -1,7 +1,8 @@
 const express = require("express");
 const cors = require("cors");
-const db = require("./config/db");
+require("dotenv").config();
 
+const analysisRoutes = require("./routes/analysisRoutes");
 
 const app = express();
 
@@ -9,10 +10,12 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("SafePath Lite Backend Running");
+  res.send("Server is working fine");
 });
 
-const PORT = 5000;
+app.use("/api", analysisRoutes);
+
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
