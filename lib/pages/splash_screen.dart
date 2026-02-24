@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'onboarding_screen.dart';
+import 'disclaimer_screen.dart';
+import 'analyze_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -107,12 +110,26 @@ class _SplashScreenState extends State<SplashScreen>
     controller.forward();
 
     // Delay for exactly 4 seconds before navigation
-    Timer(const Duration(seconds: 4), () {
+    Timer(const Duration(seconds: 4), () async {
       if (mounted) {
+        final prefs = await SharedPreferences.getInstance();
+        final hasSeenOnboarding = prefs.getBool('has_seen_onboarding') ?? false;
+        final hasAcceptedAgreement =
+            prefs.getBool('has_accepted_agreement') ?? false;
+
+        Widget nextScreen;
+        if (!hasSeenOnboarding) {
+          nextScreen = const OnboardingScreen();
+        } else if (!hasAcceptedAgreement) {
+          nextScreen = const DisclaimerScreen();
+        } else {
+          nextScreen = const AnalyzeScreen();
+        }
+
         Navigator.pushReplacement(
           context,
           PageRouteBuilder(
-            pageBuilder: (_, __, ___) => const OnboardingScreen(),
+            pageBuilder: (_, __, ___) => nextScreen,
             transitionsBuilder: (_, animation, __, child) {
               return FadeTransition(opacity: animation, child: child);
             },

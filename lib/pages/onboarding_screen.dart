@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'onboarding_design.dart';
 import 'disclaimer_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -74,7 +75,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   // Bottom Actions
                   if (_currentPage == _onboardingData.length - 1)
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        final prefs = await SharedPreferences.getInstance();
+                        await prefs.setBool('has_seen_onboarding', true);
+                        if (!mounted) return;
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -101,7 +105,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     )
                   else
                     TextButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        final prefs = await SharedPreferences.getInstance();
+                        await prefs.setBool('has_seen_onboarding', true);
                         _pageController.animateToPage(
                           _onboardingData.length - 1,
                           duration: const Duration(milliseconds: 300),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'analyze_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DisclaimerScreen extends StatefulWidget {
   const DisclaimerScreen({super.key});
@@ -90,7 +91,10 @@ class _DisclaimerScreenState extends State<DisclaimerScreen> {
             const SizedBox(height: 48),
             ElevatedButton(
               onPressed: _isAccepted
-                  ? () {
+                  ? () async {
+                      final prefs = await SharedPreferences.getInstance();
+                      await prefs.setBool('has_accepted_agreement', true);
+                      if (!mounted) return;
                       Navigator.push(
                         context,
                         MaterialPageRoute(
