@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'onboarding_design.dart';
+import 'analyze_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -74,7 +75,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   if (_currentPage == _onboardingData.length - 1)
                     ElevatedButton(
                       onPressed: () {
-                        // Navigate to home screen
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AnalyzeScreen(),
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: OnboardingDesign.primaryBlue,
