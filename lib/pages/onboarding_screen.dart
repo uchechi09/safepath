@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'onboarding_design.dart';
-import 'analyze_screen.dart';
+import 'disclaimer_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -78,7 +78,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const AnalyzeScreen(),
+                            builder: (context) => const DisclaimerScreen(),
                           ),
                         );
                       },
@@ -92,7 +92,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         elevation: 0,
                       ),
                       child: const Text(
-                        'Get Started',
+                        'Continue',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,

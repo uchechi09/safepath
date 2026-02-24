@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import '../services/spl_model_service.dart';
 import 'onboarding_design.dart';
+import 'results_screen.dart';
 
 class AnalyzeScreen extends StatefulWidget {
   const AnalyzeScreen({super.key});
@@ -12,9 +14,11 @@ class _AnalyzeScreenState extends State<AnalyzeScreen>
     with TickerProviderStateMixin {
   bool _isAnalyzing = false;
   final TextEditingController _controller = TextEditingController();
+  final SPLModelService _splService = SPLModelService();
 
   void _startAnalysis() {
-    if (_controller.text.trim().isEmpty) {
+    final text = _controller.text.trim();
+    if (text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please paste some terms first')),
       );
@@ -24,13 +28,28 @@ class _AnalyzeScreenState extends State<AnalyzeScreen>
       _isAnalyzing = true;
     });
 
-    // Simulate analysis delay
-    Future.delayed(const Duration(seconds: 5), () {
+    // Real analysis logic
+    Future.delayed(const Duration(seconds: 3), () {
       if (mounted) {
+        final detailedDetected = _splService.detectDetailedClauses(text);
+        final namesOnly = detailedDetected.map((d) => d["name"]!).toList();
+        final score = _splService.calculateRiskScore(namesOnly);
+        final details = _splService.getDetectedClauseDetails(detailedDetected);
+
         setState(() {
           _isAnalyzing = false;
         });
-        // Navigation to results page would go here
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ResultsScreen(
+              detectedClauses: namesOnly,
+              riskScore: score,
+              clauseDetails: details,
+            ),
+          ),
+        );
       }
     });
   }

@@ -1,0 +1,8 @@
+﻿00:00 +0: loading C:/Users/HP/FLUTTER PROJECTS/safepath/test/spl_model_service_test.dart
+00:00 +0: SPLModelService Tests detectDetailedClauses should identify Anti-Assignment clause
+00:00 +1: SPLModelService Tests detectDetailedClauses should identify multiple clauses
+00:00 +2: SPLModelService Tests calculateRiskScore should return normalized value
+00:00 +3: SPLModelService Tests getDetectedClauseDetails should return structured info with snippets
+00:00 +4: SPLModelService Tests Refined snippet extraction should handle mixed casing and punctuation
+00:00 +5: SPLModelService Tests Refined snippet extraction should truncate very long sentences
+00:00 +6: All tests passed!
