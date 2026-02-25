@@ -4,17 +4,27 @@
 
 ## ✨ Core Features
 
-- **🔍 De-legalese Engine**: Our AI transforms dense legal jargon into clear, actionable insights that anyone can understand.
-- **⚡ Risk Analysis**: Instantly highlights potentially harmful clauses, data-sharing policies, and hidden obligations.
-- **🎨 Fintech Aesthetic**: A premium, modern UI built with Flutter, featuring smooth transitions and a glassmorphism design language.
-- **📱 SafePath Lite**: A lightweight, fast-loading interface for quick scanning of terms on the go.
+- **🔍 Paste-and-Scan Analysis**: Skip the heavy browser load. Simply paste any terms, policies, or agreements into SafePath Lite for instant evaluation.
+- **⚡ SPL (SafePath Lite) Model**: A proprietary keyword-based detection engine that identifies high-risk clauses (Data Sharing, Service Termination, Hidden Fees, etc.) in real-time.
+- **📈 Risk Scoring**: Get a quantitative "Risk Score" based on the density and severity of detected clauses.
+- **📚 Detailed Breakdown**: Deep-dive into each detected clause with simplified explanations of what the legal jargon actually means for you.
+- **🎨 Modern Fintech UI**: A premium, state-of-the-art interface built with Flutter, featuring smooth transitions, custom animations, and a centralized design system.
+- **💾 Smart Persistence**: Remembers your progress. Once you've completed onboarding and accepted the disclaimer, SafePath takes you straight to the analysis dashboard.
 
 ## 🛠️ Technology Stack
 
 - **Framework**: [Flutter](https://flutter.dev) (Latest Stable)
 - **Language**: [Dart](https://dart.dev)
-- **UI Architecture**: Component-based with a centralized design system (`OnboardingDesign`).
-- **AI Integration**: Designed for seamless integration with LLMs for real-time document analysis.
+- **State Management**: Stateful widgets with efficient lifecycle handling.
+- **Persistence**: `shared_preferences` for local state management.
+- **Architecture**: Modular structure separating services, pages, and reusable widgets.
+
+## 📂 Project Structure
+
+- `lib/pages/`: Main application screens including `AnalyzeScreen`, `ResultsScreen`, and `VerdictScreen`.
+- `lib/services/`: Core logic and helper services like `SPLModelService`.
+- `lib/widgets/`: Reusable UI components.
+- `lib/pages/onboarding_design.dart`: Centralized theme tokens and design system.
 
 ## 🚀 Getting Started
 
@@ -40,16 +50,6 @@
    ```bash
    flutter run
    ```
-
-## 📂 Project Structure
-
-- `lib/pages/`: Contains the main screens (Splash, Onboarding, Analyze).
-- `lib/widgets/`: Reusable UI components.
-- `lib/pages/onboarding_design.dart`: Centralized design system and theme tokens.
-
-## 🤝 Contributing
-
-We welcome contributions! Please feel free to submit a Pull Request or open an issue for feature requests.
 
 ---
 
