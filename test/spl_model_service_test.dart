@@ -79,5 +79,38 @@ void main() {
       expect(snippet.length, lessThanOrEqualTo(303)); // 300 + '...'
       expect(snippet, endsWith('...'));
     });
+
+    group('Negative Tests (Preventing False Positives)', () {
+      test('Should NOT flag "assign any task" as Anti-Assignment', () {
+        const text = 'You can assign any task to the junior developers.';
+        final detected = splService.detectDetailedClauses(text);
+        final names = detected.map((d) => d["name"]).toList();
+        expect(names, isNot(contains('Anti-Assignment')));
+      });
+
+      test(
+        'Should NOT flag "have the right to remain silent" as Audit Rights',
+        () {
+          const text = 'You have the right to remain silent.';
+          final detected = splService.detectDetailedClauses(text);
+          final names = detected.map((d) => d["name"]).toList();
+          expect(names, isNot(contains('Audit Rights')));
+        },
+      );
+
+      test('Should NOT flag "receive it" as Minimum Commitment', () {
+        const text = 'Please receive it as soon as possible.';
+        final detected = splService.detectDetailedClauses(text);
+        final names = detected.map((d) => d["name"]).toList();
+        expect(names, isNot(contains('Minimum Commitment')));
+      });
+
+      test('Should NOT flag "agree the parties" as Audit Rights or others', () {
+        const text = 'We agree the parties are happy.';
+        final detected = splService.detectDetailedClauses(text);
+        final names = detected.map((d) => d["name"]).toList();
+        expect(names, isNot(contains('Audit Rights')));
+      });
+    });
   });
 }
